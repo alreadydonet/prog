@@ -1,18 +1,20 @@
 #include <iostream>
-#include "operator.h"
+#include "HR.h"
 
 using namespace std;
 
 int main()
 {
-    InternetOperator op("Internet", 1000);
+    HRDepartment hr("TechCorp", 50, 15.0, 0.13);
 
-    // устанавливаем тариф (write-only)
-    InternetOperator::setTariffCost(650);
+    // задаём норму часов (write-only)
+    HRDepartment::setMonthlyHours(160);
 
-    std::cout << "Operator: " << op.getName() << std::endl;
-    std::cout << "Subscribers: " << op.getSubscribers() << std::endl;
-    std::cout << "Revenue: " << op.getRevenue() << std::endl;
+    std::cout << "Company: " << hr.getCompanyName() << std::endl;
+    std::cout << "Employees: " << hr.getEmployees() << std::endl;
+    std::cout << "Total income tax: " << hr.getTotalIncomeTax() << std::endl;
+
+    return 0;
 
     return 0;
 }
