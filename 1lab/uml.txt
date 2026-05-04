@@ -1,0 +1,20 @@
++--------------------------------------+
+|           HRDepartment               |
++--------------------------------------+
+| - companyName: std::string           |
+| - employees: int                     |
+| - hourlyRate: double                 |
+| - incomeTaxRate: double              |
+| - monthlyHours: static int           |
++--------------------------------------+
+| + setCompanyName(string): void       |
+| + getCompanyName(): string           |
+| + setEmployees(int): void            |
+| + getEmployees(): int                |
+| + setHourlyRate(double): void        |
+| + getHourlyRate(): double            |
+| + setIncomeTaxRate(double): void     |
+| + getIncomeTaxRate(): double         |
+| + setMonthlyHours(int): void         | <-- только запись
+| + getTotalIncomeTax(): double        |
++--------------------------------------+
