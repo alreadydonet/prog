@@ -1,0 +1,62 @@
+class HRDepartment:
+    # static поле (одно на все объекты)
+    monthly_hours = 0
+
+    def __init__(self, company_name: str, employees: int, hourly_rate: float, income_tax_rate: float):
+        self._company_name = company_name
+        self._employees = employees
+        self._hourly_rate = hourly_rate
+        self._income_tax_rate = income_tax_rate
+
+    # --- company name ---
+    def set_company_name(self, name: str):
+        self._company_name = name
+
+    def get_company_name(self):
+        return self._company_name
+
+    # --- employees ---
+    def set_employees(self, emp: int):
+        if emp >= 0:
+            self._employees = emp
+
+    def get_employees(self):
+        return self._employees
+
+    # --- hourly rate ---
+    def set_hourly_rate(self, rate: float):
+        if rate >= 0:
+            self._hourly_rate = rate
+
+    def get_hourly_rate(self):
+        return self._hourly_rate
+
+    # --- income tax rate ---
+    def set_income_tax_rate(self, tax: float):
+        if tax >= 0:
+            self._income_tax_rate = tax
+
+    def get_income_tax_rate(self):
+        return self._income_tax_rate
+
+    # --- write-only property (как в C++) ---
+    @classmethod
+    def set_monthly_hours(cls, hours: int):
+        if hours > 0:
+            cls.monthly_hours = hours
+
+    # --- метод расчёта общего подоходного налога ---
+    def get_total_income_tax(self):
+        salary_per_employee = self._hourly_rate * HRDepartment.monthly_hours
+        tax_per_employee = salary_per_employee * self._income_tax_rate
+        return tax_per_employee * self._employees
+
+        # создаём объект
+hr = HRDepartment("TechCorp", 50, 15.0, 0.13)
+
+# задаём норму часов (static поле)
+HRDepartment.set_monthly_hours(160)
+
+print("Компания:", hr.get_company_name())
+print("Работников:", hr.get_employees())
+print("Подоходный налог:", hr.get_total_income_tax())
