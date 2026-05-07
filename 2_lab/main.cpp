@@ -6,6 +6,8 @@ int main()
 {
     SalarySystem& sys = SalarySystem::getInstance();
 
+
+    int nextId = 1;
     while (true) {
         std::cout << "\n1. Add work type\n";
         std::cout << "2. Add employee\n";
@@ -27,7 +29,9 @@ int main()
             std::cout << "Rate: ";
             std::cin >> rate;
 
-            sys.addWorkType(WorkType(1, name, rate, WorkKind::HOURLY));
+            sys.addWorkType(
+                WorkType(nextId++, name, rate, WorkKind::HOURLY)
+                );
         }
 
         if (choice == 2) {
@@ -38,9 +42,63 @@ int main()
             sys.addEmployee(Employee(surname));
         }
 
+        if (choice == 3) {
+            std::string surname;
+            std::cout << "Surname: ";
+            std::cin >> surname;
+
+            Employee* emp = sys.findEmployee(surname);
+
+            if (!emp) {
+                std::cout << "Employee not found\n";
+                continue;
+            }
+
+            sys.printWorkTypes();
+
+            int typeIndex;
+            int qty;
+
+            std::cout << "Work type index: ";
+            std::cin >> typeIndex;
+
+            std::cout << "Quantity: ";
+            std::cin >> qty;
+
+            WorkType* wt = sys.getWorkType(typeIndex);
+
+            if (!wt) {
+                std::cout << "Invalid work type\n";
+                continue;
+            }
+
+            emp->addWork(WorkRecord(wt, qty));
+
+            std::cout << "Work added\n";
+        }
+
+        if (choice == 4) {
+            std::string surname;
+
+            std::cout << "Surname: ";
+            std::cin >> surname;
+
+            Employee* emp = sys.findEmployee(surname);
+
+            if (!emp) {
+                std::cout << "Employee not found\n";
+                continue;
+            }
+
+            std::cout << "Salary: "
+                      << emp->getSalary()
+                      << std::endl;
+        }
+
         if (choice == 5) {
             sys.printAllSalaries();
         }
+
     }
 
     return 0;

@@ -40,6 +40,16 @@ public:
         return &workTypes[index];
     }
 
+    void printWorkTypes() {
+        for (size_t i = 0; i < workTypes.size(); ++i) {
+            std::cout << i << ". "
+                      << workTypes[i].getName()
+                      << " rate: "
+                      << workTypes[i].getRate()
+                      << std::endl;
+        }
+    }
+
     void printAllSalaries() {
         double total = 0;
         for (auto& e : employees) {
