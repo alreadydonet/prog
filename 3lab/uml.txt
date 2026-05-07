@@ -1,0 +1,43 @@
+@startuml
+
+interface IBonusStrategy {
+    +double calculate(double baseSalary)
+}
+
+class NoBonusStrategy {
+    +double calculate(double baseSalary)
+}
+
+class PercentBonusStrategy {
+    -double percent
+    +PercentBonusStrategy(double percent)
+    +double calculate(double baseSalary)
+}
+
+IBonusStrategy <|.. NoBonusStrategy
+IBonusStrategy <|.. PercentBonusStrategy
+
+class WorkType {
+    -string name
+    -double baseSalary
+    -IBonusStrategy* bonusStrategy
+    +WorkType(string, double, IBonusStrategy*)
+    +double getSalary()
+    +string getName()
+}
+
+class PayrollException {
+    +string message
+}
+
+class PayrollDepartment {
+    -vector<WorkType*> works
+    +void addWorkType(WorkType*)
+    +double calculateAverageSalary()
+}
+
+PayrollDepartment --> WorkType
+WorkType --> IBonusStrategy
+PayrollDepartment ..> PayrollException
+
+@enduml
